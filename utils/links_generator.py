@@ -36,7 +36,7 @@ def get_links_with_words(keywords):
   headers={"Ocp-Apim-Subscription-Key":secrets.ocp_key}
   search_query = " ".join(keywords)
   response = requests.get('https://api.cognitive.microsoft.com/bing/v7.0/search?q='+search_query+'&count=5',headers=headers)
-  return [result['url'] for result in response.json()['webPages']['value']]
+  return [{'url': result['url'], 'title': result['name']} for result in response.json()['webPages']['value']]
 
 def get_links_for_article(article):
   return get_links_with_words(extract_keywords(article))
