@@ -16,9 +16,8 @@ def get_embedded_links(html_text) :
     # Returns array of links embedded in article
     return map(lambda a: a.get('href'), BeautifulSoup(html_text, 'html.parser').find_all('a'))
 
-def get_cleaned_article(article_url) :
+def clean_article(uncleaned_article) :
     # Returns cleaned article
-    uncleaned_article = get_article(article_url)
     return {
         **uncleaned_article,
         'content': get_clean_text(uncleaned_article['content']),
