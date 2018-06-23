@@ -1,3 +1,8 @@
+from __future__ import division
+import operator
+import nltk
+import string
+
 def isPunct(word):
     return len(word) == 1 and word in string.punctuation
 
