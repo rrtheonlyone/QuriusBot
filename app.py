@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_restful import reqparse, Resource, Api
 from flask_cors import CORS, cross_origin
 
-from utils import text_cleaner
+from utils import text_cleaner, quiz
 from summa import summarizer
 
 app = Flask(__name__)
@@ -25,7 +25,23 @@ class Summary(Resource):
     smry = summarizer.summarize(raw_data, words=250)
     return {'data': smry}
 
+class Quiz(Resource):
+	def get(self):
+		return {'hello': 'world'}
+
+	def post(self):
+	    parser.add_argument('data')
+	    args = parser.parse_args()
+	    html = args["data"]
+
+	    raw_data = text_cleaner.get_article_from_html(html).text
+
+	    qz = quiz.generate_quiz(raw_data)
+	    return {'data': qz}
+
+
 api.add_resource(Summary, '/summary')
+api.add_resource(Quiz, '/quiz')
 
 if __name__ == '__main__':
 	app.run(debug=True)
