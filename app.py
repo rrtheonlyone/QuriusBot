@@ -19,7 +19,7 @@ class Main(Resource):
       html = args["html"]
       text = get_clean_text(html)
       quiz = generate_quiz(text)
-      //links = getrelatedlinks(getKeywords(text), 5)
+      #links = getrelatedlinks(getKeywords(text), 5)
 
 def isPunct(word):
     return len(word) == 1 and word in string.punctuation
